@@ -96,10 +96,12 @@ public class Main {
         int x = 0;
         double temp;
         double diferenca = 0;
-        double superior = 0;
-        double inferior = 0;
+        double superior;
+        double inferior;
 
-        for (int i = 1; i < linha.length - 2; i++) {
+        for (int i = 1; i < linha.length - 1; i++) {
+            superior = 0;
+            inferior = 0;
             for (int j = 0; j < linha.length; j++) {
                 if (j < i) {
                     superior += linha[j];
@@ -114,8 +116,9 @@ public class Main {
                 diferenca = temp;
             } else if (temp < diferenca) {
                 diferenca = temp;
+                x = i + 1;
             }
-            x = i;
+
         }
         return x;
     }
