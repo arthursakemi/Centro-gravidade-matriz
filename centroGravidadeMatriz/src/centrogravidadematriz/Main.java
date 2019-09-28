@@ -1,17 +1,23 @@
 package centrogravidadematriz;
 
+/*
+Grupo:
+Arthur Sakemi
+Pedro Araujo
+Roger Reis
+ */
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
         double[][] input = input();
-        int[] centro;
+        int[] centro = centroGravidade(input);
 
-        centro = centroGravidade(input);
-
-        System.out.printf("Centro: (%d, %d)\n", centro[0], centro[1]);
+        System.out.println("Centro: " + Arrays.toString(centro));
 
     }
 
@@ -40,16 +46,14 @@ public class Main {
     public static String[][] inputString() throws Exception {
         BufferedReader br = new BufferedReader(new FileReader("input.txt"));
         String[][] matriz;
-        String[] tString;
-        int[] t = new int[2];
+        String[] sizeString;
+        int lines;
 
-        tString = br.readLine().split(" ");
+        sizeString = br.readLine().split(" ");
 
-        for (int i = 0; i < 2; i++) {
-            t[i] = Integer.parseInt(tString[i]);
-        }
+        lines = Integer.parseInt(sizeString[0]);
 
-        matriz = new String[t[0]][];
+        matriz = new String[lines][];
 
         for (int i = 0; i < matriz.length; i++) {
             matriz[i] = br.readLine().split(" ");
@@ -68,7 +72,7 @@ public class Main {
     public static int linhaCentro(double[] linha) {
         int x = 0;
         double temp;
-        double diferenca = 0;
+        double absDif = 0;
         double superior;
         double inferior;
 
@@ -92,9 +96,9 @@ public class Main {
 
             //checa se a diferença atual das partes é a menor possível nesse momento
             if (i == 1) {
-                diferenca = temp;
-            } else if (temp < diferenca) {
-                diferenca = temp;
+                absDif = temp;
+            } else if (temp < absDif) {
+                absDif = temp;
                 x = i;
             }
 
@@ -124,22 +128,6 @@ public class Main {
             }
         }
         return somaColunas;
-    }
-
-    //funções de print usadas para testar as outras funções
-    public static void print(double[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print(matriz[i][j] + " ");
-            }
-            System.out.println("");
-        }
-    }
-
-    public static void printVetor(double[] vetor) {
-        for (int i = 0; i < vetor.length; i++) {
-            System.out.printf("%.1f ", vetor[i]);
-        }
     }
 
 }
